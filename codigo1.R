@@ -22,3 +22,6 @@ modelo <- glmer(
   data   = GLMM_Sarita, 
   family = poisson(link = "log")
 )
+
+summary(modelo)
+check_overdispersion(modelo)
