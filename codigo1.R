@@ -16,3 +16,4 @@ GLMM_Sarita <- GLMM_Sarita %>%
     # Variable aleatoria (factor)
     Finca_Lote      = as.factor(Finca_Lote)
   )
+levels(GLMM_Sarita$understory)
