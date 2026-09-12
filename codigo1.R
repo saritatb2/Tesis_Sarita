@@ -17,3 +17,8 @@ GLMM_Sarita <- GLMM_Sarita %>%
     Finca_Lote      = as.factor(Finca_Lote)
   )
 levels(GLMM_Sarita$understory)
+modelo <- glmer(
+  R_Frug ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
