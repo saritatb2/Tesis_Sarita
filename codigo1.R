@@ -27,3 +27,13 @@ summary(modelo)
 check_overdispersion(modelo)
 summary(GLMM_Sarita$ageHabitatyears)
 check_zeroinflation(modelo)
+
+# Modelo de Poisson para la abundancia de frugívoros
+modelo_A_frug <- glmer(
+  A_Frug ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_A_frug)
+check_overdispersion(modelo_A_frug)
+check_zeroinflation(modelo_A_frug)
