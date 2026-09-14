@@ -37,3 +37,13 @@ modelo_A_frug <- glmer(
 summary(modelo_A_frug)
 check_overdispersion(modelo_A_frug)
 check_zeroinflation(modelo_A_frug)
+
+# install.packages("MASS")
+library(MASS)
+modelo_A_frug_nb <- glmer.nb(
+  A_Frug ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+summary(modelo_A_frug_nb)
+check_overdispersion(modelo_A_frug_nb)
+check_zeroinflation(modelo_A_frug_nb)
