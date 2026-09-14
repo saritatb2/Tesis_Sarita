@@ -25,3 +25,5 @@ modelo <- glmer(
 
 summary(modelo)
 check_overdispersion(modelo)
+summary(GLMM_Sarita$ageHabitatyears)
+check_zeroinflation(modelo)
