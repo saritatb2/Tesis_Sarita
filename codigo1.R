@@ -214,3 +214,108 @@ modelo_A_amplio_nb <- glmer.nb(
 summary(modelo_A_amplio_nb)
 check_overdispersion(modelo_A_amplio_nb)
 check_zeroinflation(modelo_A_amplio_nb)
+
+#Estrategia de Forrajeo
+modelo_R_rebuscador <- glmer(
+  R_Rebuscador ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_R_rebuscador)
+check_overdispersion(modelo_R_rebuscador)
+check_zeroinflation(modelo_R_rebuscador)
+
+modelo_A_rebuscador_nb <- glmer.nb(
+  A_Rebuscador ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+check_overdispersion(modelo_A_rebuscador_nb)
+check_zeroinflation(modelo_A_rebuscador_nb)
+summary(modelo_A_rebuscador_nb)
+
+#Visitante Floral
+modelo_R_vis_floral <- glmer(
+  R_Visitante_floral ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_R_vis_floral)
+check_overdispersion(modelo_R_vis_floral)
+check_zeroinflation(modelo_R_vis_floral)
+
+modelo_A_vis_floral <- glmer(
+  A_Visitante_floral ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_A_vis_floral)
+check_overdispersion(modelo_A_vis_floral)
+check_zeroinflation(modelo_A_vis_floral)
+
+#Limpiador
+modelo_A_limpiador_nb <- glmer.nb(
+  A_Limpiador ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+check_overdispersion(modelo_A_limpiador_nb)
+check_zeroinflation(modelo_A_limpiador_nb)
+summary(modelo_A_limpiador_nb)
+
+#Atrapador Aereo
+modelo_R_atrap_aereo_nb <- glmer.nb(
+  R_Atrapador_aereo ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+check_overdispersion(modelo_R_atrap_aereo_nb)
+check_zeroinflation(modelo_R_atrap_aereo_nb)
+summary(modelo_R_atrap_aereo_nb)
+
+modelo_A_atrap_aereo_nb <- glmer.nb(
+  A_Atrapador_aereo ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+summary(modelo_A_atrap_aereo_nb)
+check_overdispersion(modelo_A_atrap_aereo_nb)
+check_zeroinflation(modelo_A_atrap_aereo_nb)
+
+#Depredador
+modelo_R_depredador <- glmer(
+  R_Depredador ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_R_depredador)
+check_overdispersion(modelo_R_depredador)
+check_zeroinflation(modelo_R_depredador)
+
+modelo_A_depredador <- glmer(
+  A_Depredador ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_A_depredador)
+check_overdispersion(modelo_A_depredador)
+check_zeroinflation(modelo_A_depredador)
+
+#Carroñero
+#Renombrar
+names(GLMM_Sarita)[names(GLMM_Sarita) == "R_Carroñero"] <- "R_Carronero"
+names(GLMM_Sarita)[names(GLMM_Sarita) == "A_Carroñero"] <- "A_Carronero"
+
+modelo_R_carronero <- glmer(
+  R_Carronero ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_R_carronero)
+check_overdispersion(modelo_R_carronero)
+check_zeroinflation(modelo_R_carronero)
+
+modelo_A_carronero <- glmer(
+  A_Carronero ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_A_carronero)
+check_overdispersion(modelo_A_carronero)
+check_zeroinflation(modelo_A_carronero)
