@@ -141,3 +141,76 @@ modelo_A_vert <- glmer(
 check_overdispersion(modelo_A_vert)
 check_zeroinflation(modelo_A_vert)
 summary(modelo_A_vert)
+#Estratos de forrajeo
+#Suelo
+modelo_R_Suelo <- glmer(
+  R_Suelo ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+check_overdispersion(modelo_R_Suelo)
+check_zeroinflation(modelo_R_Suelo)
+summary(modelo_R_Suelo)
+
+modelo_A_suelo_nb <- glmer.nb(
+  A_Suelo ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+check_overdispersion(modelo_A_suelo_nb)
+check_zeroinflation(modelo_A_suelo_nb)
+summary(modelo_A_suelo_nb)
+
+#Sotobosque
+modelo_R_soto <- glmer(
+  R_Sotobosque ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+check_overdispersion(modelo_R_soto)
+check_zeroinflation(modelo_R_soto)
+summary(modelo_R_soto)
+
+modelo_A_soto_nb <- glmer.nb(
+  A_Sotobosque ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+
+summary(modelo_A_soto_nb)
+check_overdispersion(modelo_A_soto_nb)
+check_zeroinflation(modelo_A_soto_nb)
+
+#Arboreo
+modelo_R_arboreo_nb <- glmer.nb(
+  R_Arboreo ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+check_overdispersion(modelo_R_arboreo_nb)
+check_zeroinflation(modelo_R_arboreo_nb)
+summary(modelo_R_arboreo_nb)
+
+modelo_A_arboreo_nb <- glmer.nb(
+  A_Arboreo ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+check_overdispersion(modelo_A_arboreo_nb)
+check_zeroinflation(modelo_A_arboreo_nb)
+summary(modelo_A_arboreo_nb)
+
+#Amplio
+modelo_R_amplio <- glmer(
+  R_Amplio ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+check_overdispersion(modelo_R_amplio)
+check_zeroinflation(modelo_R_amplio)
+summary(modelo_R_amplio)
+
+modelo_A_amplio_nb <- glmer.nb(
+  A_Amplio ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+
+summary(modelo_A_amplio_nb)
+check_overdispersion(modelo_A_amplio_nb)
+check_zeroinflation(modelo_A_amplio_nb)
