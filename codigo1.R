@@ -393,3 +393,97 @@ modelo_A_hummod <- glmer(
 summary(modelo_A_hummod)
 check_overdispersion(modelo_A_hummod)
 check_zeroinflation(modelo_A_hummod)
+
+#Densidad del habitat
+#DensHab
+modelo_R_denshab_nb <- glmer.nb(
+  R_DensHab ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+summary(modelo_R_denshab_nb)
+check_overdispersion(modelo_R_denshab_nb)
+check_zeroinflation(modelo_R_denshab_nb)
+
+modelo_A_denshab_nb <- glmer.nb(
+  A_DensHab ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+summary(modelo_A_denshab_nb)
+check_overdispersion(modelo_A_denshab_nb)
+check_zeroinflation(modelo_A_denshab_nb)
+
+#SemiHab
+library(glmmTMB)
+
+# 1. Ajustar el modelo Poisson Cero-Inflado (ZIP)
+modelo_R_semihab_zip <- glmmTMB(
+  R_SemiHab ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  ziformula = ~1, 
+  family    = poisson(link = "log"), 
+  data      = GLMM_Sarita
+)
+# 2. Verificar que los ceros quedaron corregidos
+check_zeroinflation(modelo_R_semihab_zip)
+# 3. Comparar AIC entre el Poisson inicial y el ZIP
+AIC(modelo_R_semihab_poisson, modelo_R_semihab_zip)
+summary(modelo_R_semihab_poisson)
+summary(modelo_R_semihab_zip)
+
+modelo_A_semihab_poisson <- glmer(
+  A_SemiHab ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+check_overdispersion(modelo_A_semihab_poisson)
+check_zeroinflation(modelo_A_semihab_poisson)
+
+#Modelo Binomial Negativo estándar (glmer.nb)
+modelo_A_semihab_nb <- glmer.nb(
+  A_SemiHab ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+# 2. Modelo Binomial Negativo Cero-Inflado (ZINB)
+modelo_A_semihab_zinb <- glmmTMB(
+  A_SemiHab ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  ziformula = ~1,
+  family    = nbinom2(link = "log"), 
+  data      = GLMM_Sarita
+)
+# 3. Comparar el AIC de todos
+AIC(modelo_A_semihab_poisson, modelo_A_semihab_nb, modelo_A_semihab_zinb)
+summary(modelo_A_semihab_nb)
+
+#OpenHab
+#Modelo Poisson base para Riqueza de Hábitat Abierto
+modelo_R_openhab_poisson <- glmer(
+  R_OpenHab ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+check_overdispersion(modelo_R_openhab_poisson)
+check_zeroinflation(modelo_R_openhab_poisson)
+summary(modelo_R_openhab_poisson)
+
+# 1. Modelo Poisson base para Abundancia de Hábitat Abierto
+modelo_A_openhab_poisson <- glmer(
+  A_OpenHab ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+
+# 2. Diagnósticos de supuestos
+check_overdispersion(modelo_A_openhab_poisson)
+check_zeroinflation(modelo_A_openhab_poisson)
+
+modelo_A_openhab_zip <- glmmTMB(
+  A_OpenHab ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  ziformula = ~1, 
+  family    = poisson(link = "log"), 
+  data      = GLMM_Sarita
+)
+
+# 2. Comparar el AIC entre el Poisson inicial y el ZIP
+AIC(modelo_A_openhab_poisson, modelo_A_openhab_zip)
+summary(modelo_A_openhab_zip)
+check_overdispersion(modelo_A_openhab_zip)
+check_zeroinflation(modelo_A_openhab_zip)
