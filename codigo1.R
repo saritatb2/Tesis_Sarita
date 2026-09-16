@@ -319,3 +319,77 @@ modelo_A_carronero <- glmer(
 summary(modelo_A_carronero)
 check_overdispersion(modelo_A_carronero)
 check_zeroinflation(modelo_A_carronero)
+
+#HABITAT
+#Shrland
+modelo_R_shrland <- glmer(
+  R_ShrLand ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_R_shrland)
+check_overdispersion(modelo_R_shrland)
+check_zeroinflation(modelo_R_shrland)
+
+modelo_A_shrland_nb <- glmer.nb(
+  A_ShrLand ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+check_overdispersion(modelo_A_shrland_nb)
+check_zeroinflation(modelo_A_shrland_nb)
+summary(modelo_A_shrland_nb)
+
+#WooLand
+modelo_R_wooland <- glmer(
+  R_WooLand ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+check_overdispersion(modelo_R_wooland)
+check_zeroinflation(modelo_R_wooland)
+summary(modelo_R_wooland)
+
+modelo_A_wooland <- glmer(
+  A_WooLand ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_A_wooland)
+check_overdispersion(modelo_A_wooland)
+check_zeroinflation(modelo_A_wooland)
+
+#Forest
+modelo_R_forest_nb <- glmer.nb(
+  R_Forest ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+check_overdispersion(modelo_R_forest_nb)
+check_zeroinflation(modelo_R_forest_nb)
+summary(modelo_R_forest_nb)
+
+modelo_A_forest_nb <- glmer.nb(
+  A_Forest ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data = GLMM_Sarita
+)
+summary(modelo_A_forest_nb)
+check_overdispersion(modelo_A_forest_nb)
+check_zeroinflation(modelo_A_forest_nb)
+
+#HumMod
+modelo_R_hummod <- glmer(
+  R_HumMod ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_R_hummod)
+check_overdispersion(modelo_R_hummod)
+check_zeroinflation(modelo_R_hummod)
+
+modelo_A_hummod <- glmer(
+  A_HumMod ~ understory + ageHabitatyears + areaStand + (1 | Finca_Lote), 
+  data   = GLMM_Sarita, 
+  family = poisson(link = "log")
+)
+summary(modelo_A_hummod)
+check_overdispersion(modelo_A_hummod)
+check_zeroinflation(modelo_A_hummod)
