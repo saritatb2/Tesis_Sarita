@@ -454,8 +454,3 @@ modelo_A_Openhab_nb <- glmer.nb(
 summary(modelo_A_Openhab_nb)
 check_overdispersion(modelo_A_Openhab_nb)
 check_zeroinflation(modelo_A_Openhab_nb)
-
-
-
-
-
